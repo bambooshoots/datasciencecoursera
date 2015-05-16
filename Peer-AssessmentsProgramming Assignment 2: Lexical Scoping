@@ -1,0 +1,33 @@
+## to cache the inverse of a matrix, two functions are created.
+## the first one just focus to set and get the inverse of a matrix, 
+## the second one focuses to return the inverse from the memory or recalculation.
+
+## the first part focuses to set and get the inverse.
+## in order to classify the functions of example, setinv and getinv functions
+## are created, then list them.
+
+makeCacheMatrix <- function(x = matrix()) {
+        minv<-NULL
+        setinv <- function(solve) {
+                minv<<-solve(x)
+        }
+        
+        getinv <- function()minv
+        list(setinv=setinv,getinv=getinv)
+}
+
+## the second part focuses to return the inverse from the memory 
+## or the recalculation of the inverse.
+
+cacheSolve <- function(x, ...) {
+        ## Return a matrix that is the inverse of 'x'
+        minv <- x$getinv()
+        if(!is.null(minv)){
+                message("getting cached data")
+                return(minv)
+        }
+        data <- x$getinv()
+        minv <- solve(data,...)
+        x$setinv(minv)
+        minv
+}
